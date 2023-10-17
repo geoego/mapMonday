@@ -31,7 +31,7 @@
 
         const monday = window.mondaySdk();
 
-        monday.listen("itemIds", (res) => {
+        monday.listen("context", (res) => {
           console.log(res.data );
           alert(res.data);
           // [12345, 12346, 12347]
