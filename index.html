@@ -28,6 +28,15 @@
          * To load a WebMap from an on-premise portal, set the portal
          * url with esriConfig.portalUrl.
          ************************************************************/
+
+        const monday = window.mondaySdk();
+
+        monday.listen("itemIds", (res) => {
+          console.log(res.data );
+          alert(res.data);
+          // [12345, 12346, 12347]
+        });
+
         const webmap = new WebMap({
           portalItem: {
             // autocasts as new PortalItem()
