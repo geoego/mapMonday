@@ -31,8 +31,8 @@
 
         const monday = window.mondaySdk();
 
-        monday.listen("events", (res) => {
-          console.log(res.data );
+        monday.listen("context", (res) => {
+          console.log(res);
           //alert(res.data);
           // [12345, 12346, 12347]
         });
