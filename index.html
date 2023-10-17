@@ -35,6 +35,11 @@
           console.log(res);
           //alert(res.data);
           // [12345, 12346, 12347]
+          //check if instanceType is item_view
+          if (res.data.instanceType === "item_view") {
+            console.log(res);
+          }
+
         });
 
         const webmap = new WebMap({
