@@ -19,7 +19,7 @@
     <script src="https://js.arcgis.com/4.27/"></script>
 
     <script>
-      require(["esri/views/MapView", "esri/WebMap"], (MapView, WebMap) => {
+      require(["esri/views/MapView", "esri/WebMap", "esri/renderers/UniqueValueRenderer", "esri/layers/FeatureLayer"], (MapView, WebMap, UniqueValueRenderer, FeatureLayer) => {
         /************************************************************
          * Creates a new WebMap instance. A WebMap must reference
          * a PortalItem ID that represents a WebMap saved to
@@ -45,16 +45,17 @@
           const latCustomFieldId = 'numbers_1';
 
           const query = `
-          {
-            items(ids: ${JSON.stringify(res.data)}) {
-              id
-              name
-              column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}"]) {
-                text
-                
+            {
+              items(ids: ${JSON.stringify(res.data)}) {
+                id
+                name
+                status
+                column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}"]) {
+                  text
+                  
+                }
               }
             }
-          }
           `;
 
           
@@ -121,6 +122,11 @@
           map: webmap,
           container: "viewDiv"
         });
+
+        //create a feature layer
+        // const featureLayer = new FeatureLayer({
+
+
       });
     </script>
   </head>
