@@ -19,7 +19,7 @@
     <script src="https://js.arcgis.com/4.27/"></script>
 
     <script>
-      require(["esri/views/MapView", "esri/WebMap", "esri/renderers/UniqueValueRenderer", "esri/layers/FeatureLayer"], (MapView, WebMap, UniqueValueRenderer, FeatureLayer) => {
+      require(["esri/views/MapView", "esri/WebMap", "esri/renderers/UniqueValueRenderer", "esri/layers/FeatureLayer", "esri/Graphic"], (MapView, WebMap, UniqueValueRenderer, FeatureLayer, Graphic) => {
         /************************************************************
          * Creates a new WebMap instance. A WebMap must reference
          * a PortalItem ID that represents a WebMap saved to
@@ -76,20 +76,12 @@
               };
 
               //create symbol for graphic
-              const simpleMarkerSymbol = {
-                type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-                color: [226, 119, 40], // RGB color values as an array
-                outline: {
-                  // autocasts as new SimpleLineSymbol()
-                  color: [255, 255, 255], // RGB color values as an array
-                  width: 1 // points
-                }
-              };
+              
 
               //create graphic
               const pointGraphic = {
                 geometry: point,
-                symbol: simpleMarkerSymbol,
+                //symbol: simpleMarkerSymbol,
                 attributes: {
                   Name: item.name,
                   Status: item.column_values[0].text
@@ -98,6 +90,11 @@
 
               //add graphic to map
               view.graphics.add(pointGraphic);
+
+              //add graphic to feature applyedits
+              itemLayer.applyEdits({
+                addFeatures: [pointGraphic]
+              });
 
             });
 
@@ -126,8 +123,61 @@
           container: "viewDiv"
         });
 
+
+        //temp point for init loading to layer
+        var point = {
+          type: "point",
+          x: 0,
+          y: 0
+        };
+        var graphic = new Graphic({
+          geometry: point
+        });
+        var graphicArray = [graphic];
+        var fields = [
+          {
+            name: "OBJECTID",
+            type: "oid"
+          },
+          {
+            name: "id",
+            type: "string"
+          },
+          {
+            name: "Name",
+            type: "string"
+          },
+          {
+            name: "Status",
+            type: "string"
+          }
+        ]
+
+        const simpleMarkerSymbol = {
+          type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+          color: [226, 119, 40], // RGB color values as an array
+          outline: {
+            // autocasts as new SimpleLineSymbol()
+            color: [255, 255, 255], // RGB color values as an array
+            width: 1 // points
+          }
+        };
+
         //create a feature layer
-        // const featureLayer = new FeatureLayer({
+        var itemLayer = new FeatureLayer({
+          source: graphicArray,
+          title: "Items",
+          objectIdField: "OBJECTID",
+          fields: fields,
+          //popupTemplate: layer311PopupTemplate,
+          renderer: {
+            type: "simple", // autocasts as new SimpleRenderer()
+            symbol: simpleMarkerSymbol
+          }
+        });
+
+        //add feature layer to map
+        view.map.add(itemLayer);
 
 
       });
