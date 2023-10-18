@@ -71,8 +71,8 @@
 
               const point = {
                 type: "point", // autocasts as new Point()
-                longitude: item.column_values[0].text,
-                latitude: item.column_values[1].text
+                longitude: item.column_values[1].text,
+                latitude: item.column_values[2].text
               };
 
               //create symbol for graphic
@@ -89,7 +89,11 @@
               //create graphic
               const pointGraphic = {
                 geometry: point,
-                symbol: simpleMarkerSymbol
+                symbol: simpleMarkerSymbol,
+                attributes: {
+                  Name: item.name,
+                  Status: item.column_values[0].text
+                },
               };
 
               //add graphic to map
