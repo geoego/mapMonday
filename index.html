@@ -49,10 +49,7 @@
             items(ids: ${JSON.stringify(res.data)}) {
               id
               name
-              column_values(ids: ["${longCustomFieldId}"]) {
-                text
-              }
-              Long: column_values(id: "${longCustomFieldId}") {
+              column_values: (id: "${longCustomFieldId}") {
                 text
               }
             }
