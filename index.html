@@ -45,6 +45,7 @@
           //check if change_column_values
           if (res.type === "change_column_values") {
 
+            console.log(res);
             itemLayer.queryFeatures().then((results) => {
               console.log(results);
               //loop over each item anc check if id matches
