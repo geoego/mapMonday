@@ -49,11 +49,14 @@
             items(ids: ${JSON.stringify(res.data)}) {
               id
               name
+              column_values {
+                numbers
+                numbers4
+              }
             }
           }
           `;
 
-          numbers
 
           //query items with itemIds
           monday.api(`query ${query} `).then(resX => {
