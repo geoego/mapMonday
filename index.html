@@ -31,8 +31,8 @@
 
         const monday = window.mondaySdk();
 
-        const callback = res => console.log(res);
-        const unsubscribe = monday.listen("events", callback);
+        // const callback = res => console.log(res);
+        // const unsubscribe = monday.listen("events", callback);
 
 
         const longCustomFieldId = 'numbers';
@@ -80,7 +80,7 @@
           });
 
           data.items.forEach(item => {
-            console.log(item);
+            //console.log(item);
             //create graphic
 
             const point = {
