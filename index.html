@@ -46,6 +46,7 @@
           if (res.type === "change_column_values") {
 
             console.log(res);
+            var featureToUpdate = []
             itemLayer.queryFeatures().then((results) => {
               console.log(results);
               //loop over each item anc check if id matches
@@ -68,10 +69,13 @@
                   }
                   feature.attributes.Status = statusValue;
                   //update feature
-                  itemLayer.applyEdits({
-                    updateFeatures: [feature]
-                  });
+                  featureToUpdate.push(feature);
+                  
                 }
+              });
+
+              itemLayer.applyEdits({
+                updateFeatures: featureToUpdate
               });
             });
 
