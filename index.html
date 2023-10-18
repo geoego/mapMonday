@@ -42,7 +42,7 @@
           //console.log(res);
 
           //query items with itemIds
-          monday.api(`query { items(ids: ${JSON.stringify(res.data)}) { id } }`).then(resX => {
+          monday.api(`query { items(ids: ${JSON.stringify(res.data)}) { id, Long } }`).then(resX => {
             console.log({testing: resX});
           });
 
