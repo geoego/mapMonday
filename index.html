@@ -46,7 +46,10 @@
             items(ids: ${JSON.stringify(res.data)}) {
               id
               name
-              location
+              column_values(ids: "long") {
+                id
+                value
+              }
             }
           }
           `;
