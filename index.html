@@ -47,7 +47,7 @@
 
             console.log(res);
 
-            monday.get("itemIds").then(res1 => 
+            monday.get("itemIds").then(res1 => {
 
               const queryx = `
                 {
@@ -67,7 +67,7 @@
                 updateData(resX.data);
               });
               
-            );
+            });
 
           }
 
