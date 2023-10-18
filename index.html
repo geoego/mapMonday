@@ -46,6 +46,7 @@
           if (res.type === "change_column_values") {
 
             itemLayer.queryFeatures().then((results) => {
+              console.log(results);
               //loop over each item anc check if id matches
               results.features.forEach(feature => {
                 if (feature.attributes.id === res.data.itemIds[0]) {
