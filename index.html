@@ -40,6 +40,7 @@
           // });
 
           var itemIdsStr = res.data.itemIds.toString();
+          console.log(itemIdsStr);
 
           //query items with itemIds
           monday.api(`query { items(ids: ${itemIdsStr}) { id } }`).then(res => {
