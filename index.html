@@ -31,6 +31,9 @@
 
         const monday = window.mondaySdk();
 
+        const callback = res => console.log(res);
+        const unsubscribe = monday.listen("events", callback);
+
         monday.listen("itemIds", (res) => {
           
           //use monday.api to query itemIds and get two number fields called Long and Lat
