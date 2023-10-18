@@ -33,28 +33,14 @@
 
         monday.listen("itemIds", (res) => {
           
-          //alert(res.data);
-          // [12345, 12346, 12347]
-          //check if instanceType is item_view
-          // if (res.data.instanceType === "item_view") {
-          //   console.log(res);
-          // }
-          
-          //loop over each item id
-          res.data.forEach((itemId) => {
-            //fetch item data in
-            monday.api(`query {items(ids: ${itemId}) {name, long, lat}}`).then((res) => {
-              //alert(res.data.items[0].name);
-              console.log(res.data);
-              //create a graphic
-              const graphic = {
-                type: "point",
-                longitude: -118.80657463861,
-                latitude: 34.0005930608889
-              };
+          //monday for ids and get all fields
+          monday.api(`query {items(ids: ${res.data.itemIds}) {name column_values {id title text}}}`).then((res) => {
+            var test = 123;
 
-            });
           });
+
+
+          
 
         });
 
