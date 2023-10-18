@@ -46,7 +46,9 @@
             items(ids: ${JSON.stringify(res.data)}) {
               id
               name
-              numbers
+              Long: column_values(id: "numbers") {
+                text
+              }
             }
           }
           `;
