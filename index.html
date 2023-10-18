@@ -33,10 +33,15 @@
 
         monday.listen("itemIds", (res) => {
           
-          //monday for ids and get all fields
-          monday.api(`query {items(ids: ${res.data.itemIds}) {name column_values {id title long lat}}}`).then((res) => {
-            console.log(res);
+          //use monday.api to query itemIds and get two number fields called Long and Lat
+          // monday.api(`query { users { id, name } }`).then(res => {
+          //   console.log(res);
+          //   /* { data: { users: [{id: 12312, name: "Bart Simpson"}, {id: 423423, name: "Homer Simpson"}] } } */
+          // });
 
+          //query items with itemIds
+          monday.api(`query { items(ids: ${res.data.itemIds}) { id, name } }`).then(res => {
+            console.log(res);
           });
 
 
