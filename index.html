@@ -41,8 +41,23 @@
 
           //console.log(res);
 
+          const query = `
+          {
+            items(ids: ${JSON.stringify(res.data)}) {
+              id
+              name
+              Long: column_values(id: "Long") {
+                text
+              }
+              Lat: column_values(id: "Lat") {
+                text
+              }
+            }
+          }
+          `;
+
           //query items with itemIds
-          monday.api(`query { items(ids: ${JSON.stringify(res.data)}) { id name } }`).then(resX => {
+          monday.api(`query ${query} `).then(resX => {
             console.log({testing: resX});
           });
 
