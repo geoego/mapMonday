@@ -46,6 +46,7 @@
           if (res.type === "change_column_values") {
 
             monday.get("itemIds", (res) => {
+              console.log(res.data);
 
               const queryx = `
                 {
