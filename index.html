@@ -57,11 +57,38 @@
           }
           `;
 
-
+          
 
           //query items with itemIds
           monday.api(`query ${query} `).then(resX => {
             console.log({testing: resX});
+            //create graphic
+            const point = {
+              type: "point", // autocasts as new Point()
+              longitude: resX.data.items[0].column_values[0].text,
+              latitude: resX.data.items[0].column_values[1].text
+            };
+
+            //create symbol for graphic
+            const simpleMarkerSymbol = {
+              type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+              color: [226, 119, 40], // RGB color values as an array
+              outline: {
+                // autocasts as new SimpleLineSymbol()
+                color: [255, 255, 255], // RGB color values as an array
+                width: 1 // points
+              }
+            };
+
+            //create graphic
+            const pointGraphic = {
+              geometry: point,
+              symbol: simpleMarkerSymbol
+            };
+
+            //add graphic to map
+            view.graphics.add(pointGraphic);
+
           });
 
 
