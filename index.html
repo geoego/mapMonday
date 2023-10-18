@@ -44,6 +44,50 @@
 
         });
 
+        function updateData(data) {
+
+          //first clear layer
+          itemLayer.applyEdits({
+            deleteFeatures: itemLayer.source.items
+          });
+
+          data.items.forEach(item => {
+            console.log(item);
+            //create graphic
+
+            const point = {
+              type: "point", // autocasts as new Point()
+              longitude: item.column_values[1].text,
+              latitude: item.column_values[2].text
+            };
+
+            //create symbol for graphic
+            
+
+            //create graphic
+            const pointGraphic = {
+              geometry: point,
+              //symbol: simpleMarkerSymbol,
+              attributes: {
+                Name: item.name,
+                Status: item.column_values[0].text
+              },
+            };
+
+            //add graphic to map
+            //view.graphics.add(pointGraphic);
+
+            //add graphic to feature applyedits
+            itemLayer.applyEdits({
+              addFeatures: [pointGraphic]
+            });
+
+          });
+
+
+          
+        }
+
         monday.listen("itemIds", (res) => {
           
           //use monday.api to query itemIds and get two number fields called Long and Lat
@@ -71,49 +115,7 @@
           `;
 
 
-          function updateData(data) {
 
-            //first clear layer
-            itemLayer.applyEdits({
-              deleteFeatures: itemLayer.source.items
-            });
-
-            data.items.forEach(item => {
-              console.log(item);
-              //create graphic
-
-              const point = {
-                type: "point", // autocasts as new Point()
-                longitude: item.column_values[1].text,
-                latitude: item.column_values[2].text
-              };
-
-              //create symbol for graphic
-              
-
-              //create graphic
-              const pointGraphic = {
-                geometry: point,
-                //symbol: simpleMarkerSymbol,
-                attributes: {
-                  Name: item.name,
-                  Status: item.column_values[0].text
-                },
-              };
-
-              //add graphic to map
-              //view.graphics.add(pointGraphic);
-
-              //add graphic to feature applyedits
-              itemLayer.applyEdits({
-                addFeatures: [pointGraphic]
-              });
-
-            });
-
-
-            
-          }
 
           
 
