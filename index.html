@@ -45,14 +45,14 @@
           //check if change_column_values
           if (res.type === "change_column_values") {
 
-            console.log(res);
+
             itemLayer.queryFeatures().then((results) => {
               console.log(results);
               //loop over each item anc check if id matches
               results.features.forEach(feature => {
                 if (feature.attributes.id === res.data.itemIds[0]) {
                   //update graphic
-
+                  console.log(feature);
                   var statusValue = "";
                   if (res.data.columnValue.index === 0) {
                     //update long
@@ -183,7 +183,7 @@
           },
           {
             name: "id",
-            type: "integer"
+            type: "string"
           },
           {
             name: "Name",
