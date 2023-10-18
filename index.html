@@ -100,6 +100,8 @@
             //create symbol for graphic
             
             console.log(item.id);
+            //log data type of item.id
+            console.log(typeof item.id);
 
             //create graphic
             const pointGraphic = {
@@ -108,7 +110,7 @@
               attributes: {
                 Name: item.name,
                 Status: item.column_values[0].text,
-                id: item.id
+                id: item.id.toString()
               },
             };
 
