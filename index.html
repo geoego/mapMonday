@@ -43,7 +43,7 @@
           //loop over each item id
           res.data.forEach((itemId) => {
             //fetch item data in
-            monday.api(`query {items(ids: ${itemId}) {name}}`).then((res) => {
+            monday.api(`query {items(ids: ${itemId}) {name, long, lat}}`).then((res) => {
               //alert(res.data.items[0].name);
               console.log(res.data);
               //create a graphic
