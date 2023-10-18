@@ -153,6 +153,147 @@
           }
         ]
 
+        var renderer = {
+          "type": "uniqueValue",
+          "visualVariables": [
+            {
+              "type": "sizeInfo",
+              "valueExpression": "$view.scale",
+              "stops": [
+                { "size": 16.45660461986992, "value": 4513.988705 },
+                { "size": 13.165283695895937, "value": 36111.909643 },
+                { "size": 6.5826418479479685, "value": 288895.277144 },
+                { "size": 3.2913209239739842, "value": 2311162.217155 }
+              ]
+            }
+          ],
+          "field1": "Status",
+          "uniqueValueGroups": [
+            {
+              "classes": [
+                {
+                  "label": "Done",
+                  "symbol": {
+                    "type": "esriSMS",
+                    "color": [0, 202, 114, 255],
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "size": 12.23,
+                    "style": "esriSMSCircle",
+                    "outline": {
+                      "type": "esriSLS",
+                      "color": [0, 0, 0, 255],
+                      "width": 0.75,
+                      "style": "esriSLSSolid"
+                    }
+                  },
+                  "values": [["Done"]]
+                },
+                {
+                  "label": "Stuck",
+                  "symbol": {
+                    "type": "esriSMS",
+                    "color": [251, 39, 93, 255],
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "size": 12.22,
+                    "style": "esriSMSCircle",
+                    "outline": {
+                      "type": "esriSLS",
+                      "color": [0, 0, 0, 255],
+                      "width": 0.75,
+                      "style": "esriSLSSolid"
+                    }
+                  },
+                  "values": [["Stuck"]]
+                },
+                {
+                  "label": "Working on it",
+                  "symbol": {
+                    "type": "esriSMS",
+                    "color": [255, 204, 0, 255],
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "size": 12.22,
+                    "style": "esriSMSCircle",
+                    "outline": {
+                      "type": "esriSLS",
+                      "color": [0, 0, 0, 255],
+                      "width": 0.75,
+                      "style": "esriSLSSolid"
+                    }
+                  },
+                  "values": [["Working on it"]]
+                }
+              ]
+            }
+          ],
+          "uniqueValueInfos": [
+            {
+              "label": "Done",
+              "symbol": {
+                "type": "esriSMS",
+                "color": [0, 202, 114, 255],
+                "angle": 0,
+                "xoffset": 0,
+                "yoffset": 0,
+                "size": 12.23,
+                "style": "esriSMSCircle",
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [0, 0, 0, 255],
+                  "width": 0.75,
+                  "style": "esriSLSSolid"
+                }
+              },
+              "value": "Done"
+            },
+            {
+              "label": "Stuck",
+              "symbol": {
+                "type": "esriSMS",
+                "color": [251, 39, 93, 255],
+                "angle": 0,
+                "xoffset": 0,
+                "yoffset": 0,
+                "size": 12.22,
+                "style": "esriSMSCircle",
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [0, 0, 0, 255],
+                  "width": 0.75,
+                  "style": "esriSLSSolid"
+                }
+              },
+              "value": "Stuck"
+            },
+            {
+              "label": "Working on it",
+              "symbol": {
+                "type": "esriSMS",
+                "color": [255, 204, 0, 255],
+                "angle": 0,
+                "xoffset": 0,
+                "yoffset": 0,
+                "size": 12.22,
+                "style": "esriSMSCircle",
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [0, 0, 0, 255],
+                  "width": 0.75,
+                  "style": "esriSLSSolid"
+                }
+              },
+              "value": "Working on it"
+            }
+          ]
+        };
+
+        var statusRenderer = UniqueValueRenderer.fromJSON(renderer);
+
         const simpleMarkerSymbol = {
           type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
           color: [226, 119, 40], // RGB color values as an array
@@ -170,10 +311,7 @@
           objectIdField: "OBJECTID",
           fields: fields,
           //popupTemplate: layer311PopupTemplate,
-          renderer: {
-            type: "simple", // autocasts as new SimpleRenderer()
-            symbol: simpleMarkerSymbol
-          }
+          renderer: statusRenderer
         });
 
         //add feature layer to map
