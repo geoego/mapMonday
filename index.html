@@ -45,28 +45,32 @@
           //check if change_column_values
           if (res.type === "change_column_values") {
 
-            console.log(res);
+            itemLayer.queryFeatures().then((results) => {
+              //loop over each item anc check if id matches
+              results.features.forEach(feature => {
+                if (feature.attributes.id === res.data.itemIds[0]) {
+                  //update graphic
 
-            monday.get("itemIds").then(res1 => {
-
-              const queryx = `
-                {
-                  items(ids: ${JSON.stringify(res1)}) {
-                    id
-                    name
-                    column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}", "status"]) {
-                      text
-                      
-                    }
+                  var statusValue = "";
+                  if (res.data.columnValue.index === 0) {
+                    //update long
+                    statusValue = "Working on it";
                   }
+                  if (res.data.columnValue.index === 1) {
+                    //update lat
+                    statusValue = "Stuck";
+                  }
+                  if (res.data.columnValue.index === 2) {
+                    //update lat
+                    statusValue = "Done";
+                  }
+                  feature.attributes.Status = statusValue;
+                  //update feature
+                  itemLayer.applyEdits({
+                    updateFeatures: [feature]
+                  });
                 }
-              `;
-
-              //query items with itemIds
-              monday.api(`query ${queryx} `).then(resX => {
-                updateData(resX.data);
               });
-              
             });
 
           }
@@ -100,7 +104,8 @@
               //symbol: simpleMarkerSymbol,
               attributes: {
                 Name: item.name,
-                Status: item.column_values[0].text
+                Status: item.column_values[0].text,
+                id: item.id
               },
             };
 
