@@ -39,8 +39,10 @@
           //   /* { data: { users: [{id: 12312, name: "Bart Simpson"}, {id: 423423, name: "Homer Simpson"}] } } */
           // });
 
+          var itemIdsStr = res.data.itemIds.toString();
+
           //query items with itemIds
-          monday.api(`query { items(ids: ${res.data.itemIds}) { id, name } }`).then(res => {
+          monday.api(`query { items(ids: ${itemIdsStr}) { id } }`).then(res => {
             console.log(res);
           });
 
