@@ -34,6 +34,16 @@
         const callback = res => console.log(res);
         const unsubscribe = monday.listen("events", callback);
 
+        monday.listen("events", (res) => {
+
+          //check if change_column_values
+          if (res.type === "change_column_values") {
+
+          }
+
+
+        });
+
         monday.listen("itemIds", (res) => {
           
           //use monday.api to query itemIds and get two number fields called Long and Lat
@@ -60,15 +70,15 @@
             }
           `;
 
-          
 
-          //query items with itemIds
-          monday.api(`query ${query} `).then(resX => {
-            console.log({testing: resX});
+          function updateData(data) {
 
-            //loop over resX.data.items and create a graphic for each item
-            //create point for each item
-            resX.data.items.forEach(item => {
+            //first clear layer
+            itemLayer.applyEdits({
+              deleteFeatures: itemLayer.source.items
+            });
+
+            data.items.forEach(item => {
               console.log(item);
               //create graphic
 
@@ -100,6 +110,53 @@
               });
 
             });
+
+
+            
+          }
+
+          
+
+          //query items with itemIds
+          monday.api(`query ${query} `).then(resX => {
+            //console.log({testing: resX});
+
+            updateData(resX.data);
+
+            //loop over resX.data.items and create a graphic for each item
+            //create point for each item
+            // resX.data.items.forEach(item => {
+            //   console.log(item);
+            //   //create graphic
+
+            //   const point = {
+            //     type: "point", // autocasts as new Point()
+            //     longitude: item.column_values[1].text,
+            //     latitude: item.column_values[2].text
+            //   };
+
+            //   //create symbol for graphic
+              
+
+            //   //create graphic
+            //   const pointGraphic = {
+            //     geometry: point,
+            //     //symbol: simpleMarkerSymbol,
+            //     attributes: {
+            //       Name: item.name,
+            //       Status: item.column_values[0].text
+            //     },
+            //   };
+
+            //   //add graphic to map
+            //   //view.graphics.add(pointGraphic);
+
+            //   //add graphic to feature applyedits
+            //   itemLayer.applyEdits({
+            //     addFeatures: [pointGraphic]
+            //   });
+
+            // });
 
 
             
