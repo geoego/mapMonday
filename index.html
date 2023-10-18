@@ -47,7 +47,7 @@
 
             monday.get("itemIds", (res) => {
 
-              const query = `
+              const queryx = `
                 {
                   items(ids: ${JSON.stringify(res.data)}) {
                     id
@@ -61,7 +61,7 @@
               `;
           
               //query items with itemIds
-              monday.api(`query ${query} `).then(resX => {
+              monday.api(`query ${queryx} `).then(resX => {
                 updateData(resX.data);
               });
     
