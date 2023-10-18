@@ -34,10 +34,38 @@
         const callback = res => console.log(res);
         const unsubscribe = monday.listen("events", callback);
 
+
+        const longCustomFieldId = 'numbers';
+        const latCustomFieldId = 'numbers_1';
+
+
+
         monday.listen("events", (res) => {
 
           //check if change_column_values
           if (res.type === "change_column_values") {
+
+            monday.get("itemIds", (res) => {
+
+              const query = `
+                {
+                  items(ids: ${JSON.stringify(res.data)}) {
+                    id
+                    name
+                    column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}", "status"]) {
+                      text
+                      
+                    }
+                  }
+                }
+              `;
+          
+              //query items with itemIds
+              monday.api(`query ${query} `).then(resX => {
+                updateData(resX.data);
+              });
+    
+            });
 
           }
 
@@ -89,17 +117,6 @@
         }
 
         monday.listen("itemIds", (res) => {
-          
-          //use monday.api to query itemIds and get two number fields called Long and Lat
-          // monday.api(`query { users { id, name } }`).then(res => {
-          //   console.log(res);
-          //   /* { data: { users: [{id: 12312, name: "Bart Simpson"}, {id: 423423, name: "Homer Simpson"}] } } */
-          // });
-
-          //console.log(res);
-
-          const longCustomFieldId = 'numbers';
-          const latCustomFieldId = 'numbers_1';
 
           const query = `
             {
@@ -113,60 +130,11 @@
               }
             }
           `;
-
-
-
-
           
-
           //query items with itemIds
           monday.api(`query ${query} `).then(resX => {
-            //console.log({testing: resX});
-
             updateData(resX.data);
-
-            //loop over resX.data.items and create a graphic for each item
-            //create point for each item
-            // resX.data.items.forEach(item => {
-            //   console.log(item);
-            //   //create graphic
-
-            //   const point = {
-            //     type: "point", // autocasts as new Point()
-            //     longitude: item.column_values[1].text,
-            //     latitude: item.column_values[2].text
-            //   };
-
-            //   //create symbol for graphic
-              
-
-            //   //create graphic
-            //   const pointGraphic = {
-            //     geometry: point,
-            //     //symbol: simpleMarkerSymbol,
-            //     attributes: {
-            //       Name: item.name,
-            //       Status: item.column_values[0].text
-            //     },
-            //   };
-
-            //   //add graphic to map
-            //   //view.graphics.add(pointGraphic);
-
-            //   //add graphic to feature applyedits
-            //   itemLayer.applyEdits({
-            //     addFeatures: [pointGraphic]
-            //   });
-
-            // });
-
-
-            
-
           });
-
-
-          
 
         });
 
