@@ -41,7 +41,7 @@
 
           //console.log(res);
 
-          const longCustomFieldId = 'numbers4';
+          const longCustomFieldId = 'numbers';
           const latCustomFieldId = 'numbers';
 
           const query = `
@@ -49,7 +49,7 @@
             items(ids: ${JSON.stringify(res.data)}) {
               id
               name
-              column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}"]) {
+              column_values(ids: ["${longCustomFieldId}"]) {
                 text
               }
             }
