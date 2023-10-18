@@ -49,8 +49,7 @@
               items(ids: ${JSON.stringify(res.data)}) {
                 id
                 name
-                status
-                column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}"]) {
+                column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}", "status"]) {
                   text
                   
                 }
