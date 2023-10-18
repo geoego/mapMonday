@@ -45,28 +45,30 @@
           //check if change_column_values
           if (res.type === "change_column_values") {
 
-            monday.get("itemIds", (res) => {
-              console.log(res.data);
+            console.log(res);
 
-              const queryx = `
-                {
-                  items(ids: ${JSON.stringify(res.data)}) {
-                    id
-                    name
-                    column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}", "status"]) {
-                      text
+            // monday.get("itemIds", (resy) => {
+            //   console.log(res.data);
+
+            //   const queryx = `
+            //     {
+            //       items(ids: ${JSON.stringify(res.data)}) {
+            //         id
+            //         name
+            //         column_values(ids: ["${longCustomFieldId}", "${latCustomFieldId}", "status"]) {
+            //           text
                       
-                    }
-                  }
-                }
-              `;
+            //         }
+            //       }
+            //     }
+            //   `;
           
-              //query items with itemIds
-              monday.api(`query ${queryx} `).then(resX => {
-                updateData(resX.data);
-              });
+            //   //query items with itemIds
+            //   monday.api(`query ${queryx} `).then(resX => {
+            //     updateData(resX.data);
+            //   });
     
-            });
+            // });
 
           }
 
