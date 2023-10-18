@@ -35,7 +35,7 @@
           
           //monday for ids and get all fields
           monday.api(`query {items(ids: ${res.data.itemIds}) {name column_values {id title text}}}`).then((res) => {
-            var test = 123;
+            console.log(res);
 
           });
 
