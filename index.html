@@ -45,7 +45,7 @@
             //fetch item data in
             monday.api(`query {items(ids: ${itemId}) {name}}`).then((res) => {
               //alert(res.data.items[0].name);
-              console.log(res.data.items[0].name);
+              console.log(res.data);
               //create a graphic
               const graphic = {
                 type: "point",
